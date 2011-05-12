@@ -1,18 +1,3 @@
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//  Texture2D.h is mostly borrowed from Apple example code
-//     it was put in this class to make the code more managable
-//
-//  GlobeMarker.h handles all the rendering for the markers
-
-
-
-
-//
-//  Face.h
-//  globe
-//
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import <OpenGLES/EAGL.h>

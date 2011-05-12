@@ -1,10 +1,3 @@
-//
-//  Textures.h
-//  globe
-//
-//  Created by Steven on 12/12/09.
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>

@@ -1,10 +1,4 @@
-//
-//  DDKCustomTabButton.m
-//  VAOMoscowGuide
-//
-//  Created by Dmitry Sukhorukov on 10/13/10.
-//  Copyright 2010 AR Door. All rights reserved.
-//
+
 
 #import "DDKCustomTabButton.h"
 

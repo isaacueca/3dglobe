@@ -1,9 +1,3 @@
-//
-//  globeAppDelegate.m
-//  globe
-//
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
 
 #import "globeAppDelegate.h"
 #import "WorldViewController.h"

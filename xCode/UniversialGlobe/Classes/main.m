@@ -1,5 +1,3 @@
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 

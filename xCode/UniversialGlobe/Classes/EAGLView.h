@@ -1,8 +1,4 @@
-// Copyright 2009 Clever Coding LLC. All rights reserved.
-//
-// The EAGLView class is the main 3D view.  All of the rendering is in this class
-// except for the Markers although the markers are instantiated and called from this class.
-//
+
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
@@ -13,6 +9,7 @@
 #import "MarkersForGlobeList.h"
 #import "SmoothRotator.h";
 #import "MapViewController.h"
+#import "PopUpViewController.h"
 
 
 //for globe demo
@@ -107,9 +104,13 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 	MapSwapState mapSwapState;
 	BOOL rotateOn;
 	CLLocationManager *locationManager;
-	
+    
+    PopupViewController *popUpViewController;
+    UIPopoverController *popoverController;
+
 }
 
+@property(nonatomic, retain) UIPopoverController *popoverController;
 @property NSTimeInterval animationInterval;
 @property (nonatomic, assign) BOOL looking;
 @property (nonatomic, assign) float usersLat;
@@ -117,6 +118,8 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 @property (nonatomic, assign) ZoomEffect currentZoomEffect;
 @property (nonatomic, assign) UIViewController *parentVC;
 @property (nonatomic, assign) GlobeMarker *usersLocationMarker;
+
+@property(nonatomic, retain) PopupViewController *popUpViewController;
 
 
 // Add a globe marker to the surface of the globe.

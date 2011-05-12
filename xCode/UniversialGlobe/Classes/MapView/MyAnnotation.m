@@ -1,6 +1,4 @@
-//  MyAnnotation.m
-//  SimpleMap
-//
+
 
 #import "MyAnnotation.h"
 

@@ -1,10 +1,3 @@
-//
-//  DDKBorderView.m
-//  VAOMoscowGuide
-//
-//  Created by Dmitry Sukhorukov on 10/14/10.
-//  Copyright 2010 AR Door. All rights reserved.
-//
 
 #import "DDKBorderView.h"
 

@@ -1,8 +1,4 @@
-// Copyright 2009 Clever Coding LLC. All rights reserved.
-//
-// The EAGLView class is the main 3D view.  All of the rendering is in this class
-// except for the Markers although the markers are instantiated and called from this class.
-//
+
 
 #import <QuartzCore/QuartzCore.h>
 #import <OpenGLES/EAGLDrawable.h>
@@ -10,6 +6,7 @@
 #import "GlobeConstants.h"
 #import "EAGLView.h"
 #import "Hemisphere.h"
+#import "PopUpViewController.h"
 
 #define USE_DEPTH_BUFFER 1
 #define USE_PVR_TEXTURES 0
@@ -36,6 +33,9 @@
 @synthesize currentZoomEffect;
 @synthesize parentVC;
 @synthesize usersLocationMarker;
+@synthesize popUpViewController;
+@synthesize popoverController;
+
 
 // You must implement this method
 + (Class)layerClass {
@@ -140,12 +140,7 @@
 		rotateBounds = 70;
 		PI = 3.1416;
 		offset = 0.0;
-		
-		
-		
-		
-		
-		
+
 		self.exclusiveTouch = YES;
 		[self startAnimation];
 		
@@ -158,21 +153,6 @@
 		currentZoomEffect = zoomOut;
 		looking = NO;
 		
-		if(!locationManager){
-			usersLat = -999;
-			usersLon = -999;
-			usersLocationMarker = [[GlobeMarker alloc] init];
-			NSLog(@"starting Location manager in vwa");
-			locationManager = [[CLLocationManager alloc] init];
-			[locationManager setDelegate:self];
-			[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-			if(!locationManager.locationServicesEnabled)
-			{
-				//aTextView.text = @"Location Services Not enabled";
-			}
-			[locationManager startUpdatingLocation];
-			
-		}
 		[self getAsingleMarker];
 		[self lookAtMarker:theCurrentMarker];
 		//end for demo globe
@@ -412,7 +392,7 @@
 		NSDictionary *addressDic = nil;
 		
 		MKPlacemark *thePlace = [[MKPlacemark alloc] initWithCoordinate:theLoc.coordinate addressDictionary:addressDic];
-		[self showMarkerOnGoogleMaps:thePlace];
+		[self showPopupWindow:thePlace];
 	}
 
 	return YES;
@@ -429,7 +409,7 @@
 	
 	lon_deg = -lon_deg;
 	
-	NSLog(@"CENTER OF GLOBE: lat = %f :: lon = %f", lat_deg, lon_deg);
+	//NSLog(@"CENTER OF GLOBE: lat = %f :: lon = %f", lat_deg, lon_deg);
 }
 
 //touchesBegan is called everything a user first touches the screen
@@ -918,7 +898,10 @@
 - (void)dealloc {
     [smoothRotator release];
     [self stopAnimation];
-    
+    [popUpViewController release];
+    popUpViewController = nil;
+    [popoverController release];
+    popoverController = nil;
     if ([EAGLContext currentContext] == context) {
         [EAGLContext setCurrentContext:nil];
     }
@@ -1050,90 +1033,9 @@
 }
 
 -(IBAction)curLocationButtonAction:(id)sender{
-	NSLog(@"curLocationButtonAction pushed");
-	if(usersLocationMarker.location != nil)
-		[self lookAtMarker:usersLocationMarker];
-	else
-		NSLog(@"no lat and lon");
+
 }
 
-// Called when the location is updated
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
-
-	
-	usersLat = newLocation.coordinate.latitude;
-	usersLon = newLocation.coordinate.longitude;
-	
-	CLLocation  *tempLocation = [[CLLocation alloc] initWithLatitude:usersLat longitude:usersLon];
-	
-	usersLocationMarker.location = tempLocation;
-	
-	//NSString *lat;
-	//NSString *lon;
-	//lat = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
-	//lon = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
-	
-	NSLog(@"Got here :: didUpdateToLocation");
-	[manager stopUpdatingLocation];
-	
-}
-
-
-// Called when there is an error getting the location
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
-{
-	NSLog(@"loc manager didFailWithError");
-	NSMutableString *errorString = [[[NSMutableString alloc] init] autorelease];
-	
-	if ([error domain] == kCLErrorDomain) {
-		
-		// We handle CoreLocation-related errors here
-		
-		switch ([error code]) {
-				// This error code is usually returned whenever user taps "Don't Allow" in response to
-				// being told your app wants to access the current location. Once this happens, you cannot
-				// attempt to get the location again until the app has quit and relaunched.
-				//
-				// "Don't Allow" on two successive app launches is the same as saying "never allow". The user
-				// can reset this for all apps by going to Settings > General > Reset > Reset Location Warnings.
-				//
-			case kCLErrorDenied:
-				[errorString appendFormat:@"%@\n", NSLocalizedString(@"LocationDenied", nil)];
-				break;
-				
-				// This error code is usually returned whenever the device has no data or WiFi connectivity,
-				// or when the location cannot be determined for some other reason.
-				//
-				// CoreLocation will keep trying, so you can keep waiting, or prompt the user.
-				//
-			case kCLErrorLocationUnknown:
-				[errorString appendFormat:@"%@\n", NSLocalizedString(@"LocationUnknown", nil)];
-				break;
-				
-				// We shouldn't ever get an unknown error code, but just in case...
-				//
-			default:
-				[errorString appendFormat:@"%@ %d\n", NSLocalizedString(@"GenericLocationError", nil), [error code]];
-				break;
-		}
-	} else {
-		// We handle all non-CoreLocation errors here
-		// (we depend on localizedDescription for localization)
-		[errorString appendFormat:@"Error domain: \"%@\"  Error code: %d\n", [error domain], [error code]];
-		[errorString appendFormat:@"Description: \"%@\"\n", [error localizedDescription]];
-	}
-	
-	NSLog(@"Error in LM = %@", errorString);
-	//[self addTextToLog:errorString];
-	// Send the update to our delegate
-	//[self.delegate newLocationUpdate:errorString];
-	
-	[locationManager stopUpdatingLocation];
-}
 
 #pragma mark Begin MKReverseGeocoderDelegate methods
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error{
@@ -1162,7 +1064,7 @@
 	NSLog(@"   : %@",postalCode);
 	NSLog(@"   : %@",country);
 	NSLog(@"   : %@",countryCode);
-	[self showMarkerOnGoogleMaps:placemark];
+	[self showPopupWindow:placemark];
 	
 }
 #pragma mark End MKReverseGeocoderDelegate methods
@@ -1181,18 +1083,31 @@
 	NSLog(@"END: reverseGeocodeLocation;");
 }
 
-- (void) showMarkerOnGoogleMaps:(MKPlacemark*)thePlace{
-	NSLog(@"BEGIN: showMarkerOnGoogleMaps");
+- (void) showPopupWindow:(MKPlacemark*)thePlace{
+	//create the view controller from nib
+	self.popUpViewController = [[[PopupViewController alloc] 
+                                      initWithNibName:@"ViewWithPicker" 
+                                      bundle:[NSBundle mainBundle]] autorelease];
 	
-	MapViewController *mapViewController = [[MapViewController alloc] initWithPlaceMark:thePlace loc:touchedLocation];
-	mapViewController.hidesBottomBarWhenPushed = YES;
-	[parentVC.navigationController pushViewController:mapViewController animated:YES];
-	[mapViewController release];
+	//set popover content size
+	popUpViewController.contentSizeForViewInPopover = 
+    CGSizeMake(popUpViewController.view.frame.size.width, popUpViewController.view.frame.size.height);
+	
+	//set delegate 
+    
+	
+	//create a popover controller
+	self.popoverController = [[[UIPopoverController alloc]
+                               initWithContentViewController:popUpViewController] autorelease];
+    
+	//present the popover view non-modal with a
+	//refrence to the button pressed within the current view
+	[self.popoverController presentPopoverFromRect:CGRectMake(500.0f, 300.f, 10.0f, 10.0f) inView:self 
+						  permittedArrowDirections:0
+										  animated:YES];
+
 }
 
--(IBAction)showGoogleMaps:(id)sender{
-	NSLog(@"BEGIN: showGoogleMaps");
-}
 
 
 @end

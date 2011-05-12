@@ -1,8 +1,3 @@
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
-// The MarkersForGlobeList class is mostly for the demo globe to demostrate creating markers although licensees are free to use
-// creating markers although licensees are free to use the code as they see fit
-//
 
 #import "MarkersForGlobeList.h"
 

@@ -1,10 +1,3 @@
-//
-//  MyAnnotation.h
-//  WhereRU
-//
-//  Created by Steven on 6/1/09.
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>

@@ -1,8 +1,4 @@
-//
-//  Constants.h
-//
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
+
 
 #define MOMENTUM_CONSTANT 18        //constant that effect the rate at which the globe will slow down
 #define MOMENTUM_STOP .15           //constant at which to stop momentum effect all together

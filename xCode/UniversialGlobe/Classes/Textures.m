@@ -1,10 +1,4 @@
-//
-//  Textures.m
-//  globe
-//
-//  Created by Steven on 12/12/09.
-//  Copyright 2009 Clever Coding LLC. All rights reserved.
-//
+
 
 #import "Textures.h"
 #import <OpenGLES/ES1/glext.h>

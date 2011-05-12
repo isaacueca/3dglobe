@@ -101,6 +101,9 @@
 		8DF6CA3B11B6E05C0045F023 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF6CA3A11B6E05C0045F023 /* Default-Portrait~ipad.png */; };
 		8DF6CA5611B6E5470045F023 /* Icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF6CA5411B6E5470045F023 /* Icon57.png */; };
 		8DF6CA5711B6E5470045F023 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF6CA5511B6E5470045F023 /* Icon72.png */; };
+		95AE333E137C5DB700FDFC6A /* ViewWithPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95AE333D137C5DB700FDFC6A /* ViewWithPicker.xib */; };
+		95AE3342137C5DC100FDFC6A /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AE3341137C5DBF00FDFC6A /* PopupViewController.m */; };
+		95AE334E137C648A00FDFC6A /* popup.png in Resources */ = {isa = PBXBuildFile; fileRef = 95AE334D137C648A00FDFC6A /* popup.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +221,10 @@
 		8DF6CA3A11B6E05C0045F023 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = SOURCE_ROOT; };
 		8DF6CA5411B6E5470045F023 /* Icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon57.png; sourceTree = "<group>"; };
 		8DF6CA5511B6E5470045F023 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		95AE333D137C5DB700FDFC6A /* ViewWithPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewWithPicker.xib; sourceTree = "<group>"; };
+		95AE3340137C5DBF00FDFC6A /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
+		95AE3341137C5DBF00FDFC6A /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
+		95AE334D137C648A00FDFC6A /* popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +269,7 @@
 				0118DAC5137BBE55000FFAFD /* SecondViewController.xib */,
 				01160C5D137BCC3000C49B3B /* GTabBar */,
 				5E8CFE180FBE1F9100B8D31E /* GlobeConstants.h */,
+				95AE334C137C62D800FDFC6A /* Popup */,
 				5EBD22AC0F8D45960051C4B6 /* GlobeMarker.h */,
 				5EBD22AD0F8D45960051C4B6 /* GlobeMarker.m */,
 				8D22EEB30FBEF02B0068ABFA /* main.m */,
@@ -341,6 +349,7 @@
 		8D22EEB80FBEF0420068ABFA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				95AE334D137C648A00FDFC6A /* popup.png */,
 				01160C4D137BC8C200C49B3B /* onePixel.png */,
 				01160C4B137BC87F00C49B3B /* tabIconSelected.png */,
 				01160C3F137BC6E100C49B3B /* tabIcon.png */,
@@ -372,6 +381,7 @@
 		8D22EEC70FBEF0420068ABFA /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				95AE333D137C5DB700FDFC6A /* ViewWithPicker.xib */,
 				8D22EEC80FBEF0420068ABFA /* MainWindow.xib */,
 				8D22EEC90FBEF0420068ABFA /* World.xib */,
 			);
@@ -599,6 +609,15 @@
 			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
+		95AE334C137C62D800FDFC6A /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				95AE3340137C5DBF00FDFC6A /* PopupViewController.h */,
+				95AE3341137C5DBF00FDFC6A /* PopupViewController.m */,
+			);
+			name = Popup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -719,6 +738,8 @@
 				01160C40137BC6E100C49B3B /* tabIcon.png in Resources */,
 				01160C4C137BC87F00C49B3B /* tabIconSelected.png in Resources */,
 				01160C4E137BC8C200C49B3B /* onePixel.png in Resources */,
+				95AE333E137C5DB700FDFC6A /* ViewWithPicker.xib in Resources */,
+				95AE334E137C648A00FDFC6A /* popup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +766,7 @@
 				01160C4A137BC7CA00C49B3B /* DDKCustomTabButton.m in Sources */,
 				01160C5B137BCC2C00C49B3B /* GTabBar.m in Sources */,
 				01160C5C137BCC2C00C49B3B /* GTabTabItem.m in Sources */,
+				95AE3342137C5DC100FDFC6A /* PopupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,4 @@
-// Copyright 2009 Clever Coding LLC. All rights reserved.
-//
-// SmoothRotator class is a convenience  class used to calculate the direct point between two points on the globe
-//
+
 
 #import "SmoothRotator.h"
 
